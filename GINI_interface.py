@@ -1,8 +1,18 @@
 import requests #Importamos la librería requests para hacer solicitudes HTTP
 import json #Importamos la librería json para trabajar con archivos JSON
+import ctypes #Importamos la librería ctypes que nos deja mandar la informacion a el programa en c
+import numpy as np #Importamos la librería numpy para trabajar con arreglos de datos
+from tkinter import Tk, Label, Button #Importamos la librería tkinter para crear una interfaz gráfica
 
 # URL de la API a dónde vamos a hacer las solicitudes 
 URL = 'https://api.worldbank.org/v2/en/country/all/indicator/SI.POV.GINI?format=json&date=2011:2020&per_page=32500&page=1&country=%22Argentina%22'
+
+#Cargamos la libreria de C
+calculator = ctypes.CDLL('./libcalc.so')
+
+#Definimos el tipo de dato que vamos a usar en la biblioteca
+calculator.average_plus_one.argtypes = [ctypes.POINTER(ctypes.c_float),ctypes.c_int]
+calculator.average_plus_one.restype = ctypes.c_int
 
 #funcion GET para traer datos de la API
 def get_data():
@@ -16,33 +26,62 @@ def get_data():
     else:
         print('Error')
         return None
-    
+
+#funcion para filtrar la data por pais    
 def filter_country(data, country):
-    filtered_data = []
+    filtered_data = [] #Creamos una lista vacía para guardar la data filtrada segun pais
+    
+    #Iteramos sobre la data y si el item tiene la clave 'country' y la clave 'id' y el valor de 'id' es igual al pais, lo agregamos a la lista
     for item in data:
         if 'country' in item and 'id' in item['country'] and item['country']['id'] == country:
             filtered_data.append(item)
     return filtered_data
 
+#funcion para filtrar los valores de la data
 def filter_values(data):
-    values = []
+    values = [] #Creamos una lista vacía para guardar los valores
+    
+    #Iteramos sobre la data y si el item tiene la clave 'value' y el valor no es None, lo agregamos a la lista
     for item in data:
         if 'value' in item:
-            if item['value'] is None:
-                values.append(0)
-            else:
+            if item['value'] is not None:
                 values.append(item['value'])
     return values
 
-#funcion principal
-def main():
+#funcion para actualizar la info
+def update_label(result,label):
+    label['text'] = f'El resultado del indice GINI es: {result}'
+
+#funcion para crear la interfaz grafica
+def on_button_click(label):
     data = get_data() #Obtenemos la data de la API
     if data: #Si la data no es None
         filtered_data = filter_country(data[1], 'AR')
         values = filter_values(filtered_data)
-        
+        values = np.array(values, dtype=np.float32)
+        result = calculator.average_plus_one(values.ctypes.data_as(ctypes.POINTER(ctypes.c_float)), len(values))
+        update_label(result,label)
     else:
-        print('No data available') #Si la data es None, imprimimos un mensaje de error
+        label_result['text'] = 'No hay información disponible' #Si la data es None, imprimimos un mensaje de error
+
+def create_gui():
+    root = Tk() #Creamos una ventana
+    root.title('Calculadora GINI') #Le ponemos un título a la ventana
+    
+    # Etiqueta que mostrará el resultado
+    result_label = Label(root, text="Solicitar datos para obtener el índice GINI de Argentina")
+    result_label.pack()
+
+    # Botón que al presionarlo actualizará la etiqueta
+    request_button = Button(root, text="Solicitar Datos", command=lambda: on_button_click(result_label))
+    request_button.pack()
+
+    root.mainloop() #Iniciamos el loop de la ventana
+
+
+#funcion principal
+def main():
+    create_gui() #Invocamos la interfaz
 
 #esto asegura que se llame el main cuando se ejecute el script
 if __name__ == "__main__":

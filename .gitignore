@@ -1,6 +1,9 @@
 # Build directory
 /build/
 
+#dinamic libs   
+libcalc.so
+
 # Editor/IDE specific files
 .vscode/
 .idea/
