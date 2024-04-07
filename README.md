@@ -1,18 +1,3 @@
-# SDC-StackFrame
-
-### Uso para compilar y correr el programa
-
-En la carpeta raíz del repositorio ejecutar los siguientes comandos:
-
-```bash
-mkdir build
-cd build
-cmake ..
-make
-cd ..
-python3 GINI_interface.py
-```
-
 # SdC 2024 - Trabajo Práctico N° 2
 
 ## Introducción
@@ -35,5 +20,47 @@ Otro aspecto a tener en cuenta, es que sebe utilizar el STACK para convocar, env
 - Librería "numpy" para trabajar numéricamente con los arreglos de datos obtenidos.
 - Librería "tkinter" para proporcionar una interfaz gráfica (GUI) y mostrar los resultados finales.
 
+## Pasos de funcionamiento de la aplicación
+1. Se cargan las librerias.
+2. Se define el tipo de dato requerido para los datos de la API.
+3. Se hace la solicitud de datos a la URL del banco mundial. 
+4. Se verifica que la solicitud haya sido exitosa.
+5. Obtenidos los datos, se filtran por el país nombre del país deseado.
+6. Se abre la GUI donde se le da al usuario la opción de mostrar el índice GINI.
+7. Si el usuario decide obtener el valor de índice, se llama a la función "calculator" escrita en C para la conversión de tipo de dato y agregarle +1.
+8. Se muestra el resultado en la ventana gráfica.
 
 
+
+
+
+
+[!NOTE]
+Para compilar y correr el programa, tener instalado los paquetes:
+- nasm 
+```bash
+sudo apt-get install nasm gcc-multilib g++-multilib
+```
+- cmake 
+```bash
+sudo apt install cmake
+```
+- numpy
+```bash
+pip install numpy
+```
+- tkinter
+```bash
+sudo apt install python3-tk
+```
+
+Luego para compilar y correr el programa en la carpeta raíz del repositorio ejecutar los siguientes comandos:
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+cd ..
+python3 GINI_interface.py
+```
