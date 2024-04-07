@@ -2,7 +2,7 @@
 
 ## Introducción
 
-El objetivo del siguiente trabajo es diseñar e implementar una interfaz que muestre el índice GINI, obteniendo información desde la API del Banco Mundial "https://api.worldbank.org/v2/en/country/all/indicator/SI.POV.GINI?format=json&date=2011:2020&per_page=32500&page=1&country=%22Argentina%22".
+El objetivo del siguiente trabajo es diseñar e implementar una interfaz que muestre el índice GINI del país requerido, obteniendo información desde la API del Banco Mundial "https://api.worldbank.org/v2/en/country/all/indicator/SI.POV.GINI?format=json&date=2011:2020&per_page=32500&page=1&country=%22Argentina%22".
 La obtención de los datos se hará mediante el uso de API REST y Python, luego esos datos serán pasados a un programa en C que será el intermediario para hacer llamadas a rutinas de cálculos escritas en Assembler y luego de realizados los mismos, deben ser mostrados los resultados.
 Los cálculos a realizar consisten en:
 
@@ -31,12 +31,14 @@ Otro aspecto a tener en cuenta, es que sebe utilizar el STACK para convocar, env
 8. Se muestra el resultado en la ventana gráfica.
 
 ## Imágenes funcionando
-![imagen de solicitud](/pictures/solicitud.png)
-![imagen de respuesta](/pictures/respuesta.png)
 
+<p align="center">
+  <img src="/pictures/solicitud.png" alt="Posibles solicitudes del índice GINI">
+</p>
 
-
-
+<p align="center">
+  <img src="/pictures/respuesta.png" alt="Valor del índice GINI según el país seleccionado">
+</p>
 
 
 
