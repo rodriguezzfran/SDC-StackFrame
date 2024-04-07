@@ -72,7 +72,8 @@ def create_gui():
     root.title('Calculadora GINI') #Le ponemos un título a la ventana
    # Cambiando el color de fondo de la ventana
     root.configure(bg='#f0f0f0')
-    
+   
+   
     # Etiqueta que mostrará el resultado
     result_label = Label(root, text="Click para obtener el índice GINI del país seleccionado", fg='#333', font=('Helvetica', 14), bg='#f0f0f0')
     result_label.pack()
