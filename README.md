@@ -35,8 +35,8 @@ Otro aspecto a tener en cuenta, es que sebe utilizar el STACK para convocar, env
 
 
 
-[!NOTE]
-Para compilar y correr el programa, tener instalado los paquetes:
+
+## Para compilar y correr el programa, tener instalado los paquetes:
 - nasm 
 ```bash
 sudo apt-get install nasm gcc-multilib g++-multilib
@@ -54,7 +54,7 @@ pip install numpy
 sudo apt install python3-tk
 ```
 
-Luego para compilar y correr el programa en la carpeta raíz del repositorio ejecutar los siguientes comandos:
+En la carpeta raíz del repositorio ejecutar los siguientes comandos:
 
 ```bash
 mkdir build
