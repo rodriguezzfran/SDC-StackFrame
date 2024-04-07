@@ -30,6 +30,10 @@ Otro aspecto a tener en cuenta, es que sebe utilizar el STACK para convocar, env
 7. Si el usuario decide obtener el valor de índice, se llama a la función "calculator" escrita en C para la conversión de tipo de dato y agregarle +1.
 8. Se muestra el resultado en la ventana gráfica.
 
+## Imágenes funcionando
+![imagen de solicitud](/pictures/solicitud.png)
+![imagen de respuesta](/pictures/respuesta.png)
+
 
 
 
