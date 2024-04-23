@@ -16,7 +16,8 @@ average_plus_one_asm:
 
     ; Bucle para sumar los valores del array
     suma_loop:
-        add rax, [rdi+rcx*4-4]  ; Sumamos el valor actual al acumulador
+        cvtss2si r8, [rdi+rcx*4-4]  ; Convertimos float a int
+        add rax, r8                ; Sumamos el valor actual al acumulador
         loop suma_loop
 
     ; Calculamos el promedio

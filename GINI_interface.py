@@ -62,9 +62,9 @@ def on_button_click(label, country_code):
         filtered_data = filter_country(data[1], country_code)
         values = filter_values(filtered_data)
         values = np.array(values, dtype=np.float32)
-        print("aca llega")
+        
         result = calculator.average_plus_one(values.ctypes.data_as(ctypes.POINTER(ctypes.c_float)), len(values))
-        print("aca pasa")
+        
         update_label(result,label)
     else:
         label_result['text'] = 'No hay información disponible' #Si la data es None, imprimimos un mensaje de error

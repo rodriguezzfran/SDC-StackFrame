@@ -28,7 +28,7 @@ int average_plus_one(float* array, int size) {
     for (int i = 0; i < size; i++) {
         printf("%f\n", array[i]);
     }
-    
+
     int result = average_plus_one_asm(array, size);
     
 
