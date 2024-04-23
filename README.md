@@ -70,3 +70,27 @@ make
 cd ..
 python3 GINI_interface.py
 ```
+## PARTE 2
+Para la parte 2 se incorporó una llamada a Assembler desde la función de C, el objetivo es desde Pyhton se haga una llamada a una función en C, luego esta función en C llamará a una en Assembler habiendole pasado un puntero a un array, la función en Assembler se encargará de usar el stack frame para acceder a los parámetros, convertir los elementos del array a int, sumarlos, sacar el promedio y sumarle uno, para luego ser devuelto a C, quién los volverá a enviar a Python
+
+### Como instalar
+Para poder ejecutar este nuevo programa debemos usar los siguiente comandos.
+
+Una vez tengamos el código en assembler en un `.asm` debemos compilarla para crear una librería compartida (.so)
+
+```bash
+nasm -f elf64 -o average_plus_one.o average_plus_one.asm
+gcc -shared -o libcalc_asm.so average_plus_one.o
+```
+Una vez tenemos la librería compartida para C, repetimos el proceso para crear una librería compartida para Python
+
+```bash
+gcc -shared -o libcalc.so calculator.c -ldl
+```
+Finalmente abrimos el código creado para python utilizando el siguiente comando
+
+```bash
+python3 GINI_interface.py
+```
+
+
