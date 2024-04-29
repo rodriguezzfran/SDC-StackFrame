@@ -2,31 +2,25 @@ section .data
     num dd 0
 
 section .text
-    global average_plus_one_asm
+global add_one
 
-average_plus_one_asm:
+add_one:
+    ; Configurar el stack frame
+    push rbp          ; Guardar el frame actual
+    mov rbp, rsp      ; Establecer rbp para acceder al stack
+    
+    ; Acceder al primer argumento (está a 16 bytes de rbp debido a la dirección de retorno y rbp)
+    mov eax, dword [rbp + 16]
+    
+    ; Sumar uno al valor de entrada
+    add eax, 1
+    
+    ; Devolver el resultado en eax (o rax para 64 bits)
+    mov rax, rdi      ; Devolver el resultado al llamador
+    
+    ; Restaurar el stack frame
+    pop rbp           ; Restaurar rbp
+    ret               ; Retornar al llamador
 
-    ; Parámetros:
-    ;   - [rdi]: Dirección base del array (puntero al primer elemento)
-    ;   - [rsi]: Tamaño del array (cantidad de elementos)
-    ; Devuelve el resultado en rax
-
-    xor rax, rax        ; Inicializamos el acumulador en 0
-    mov rcx, rsi        ; Cargamos el tamaño del array en rcx
-
-    ; Bucle para sumar los valores del array
-    suma_loop:
-        cvtss2si r8, [rdi+rcx*4-4]  ; Convertimos float a int
-        add rax, r8                ; Sumamos el valor actual al acumulador
-        loop suma_loop
-
-    ; Calculamos el promedio
-    cqo                 ; Extendemos el acumulador a rdx:rax
-    idiv rsi            ; Dividimos rdx:rax por el tamaño del array
-
-    ; Sumamos 1 al resultado
-    add rax, 1
-
-    ret
 
     

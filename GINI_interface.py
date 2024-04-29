@@ -11,8 +11,7 @@ URL = 'https://api.worldbank.org/v2/en/country/all/indicator/SI.POV.GINI?format=
 calculator = ctypes.CDLL('./libcalc.so')
 
 #Definimos el tipo de dato que vamos a usar en la biblioteca
-calculator.average_plus_one.argtypes = [ctypes.POINTER(ctypes.c_float),ctypes.c_int]
-calculator.average_plus_one.restype = ctypes.c_int
+calculator.plus_one.argtypes = [ctypes.POINTER(ctypes.c_float),ctypes.c_int]
 
 #funcion GET para traer datos de la API
 def get_data():
@@ -63,7 +62,7 @@ def on_button_click(label, country_code):
         values = filter_values(filtered_data)
         values = np.array(values, dtype=np.float32)
         
-        result = calculator.average_plus_one(values.ctypes.data_as(ctypes.POINTER(ctypes.c_float)), len(values))
+        resutl = calculator.plus_one(values.ctypes.data_as(ctypes.POINTER(ctypes.c_float)), len(values))
         
         update_label(result,label)
     else:
