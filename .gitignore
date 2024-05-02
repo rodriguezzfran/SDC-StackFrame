@@ -2,7 +2,10 @@
 /build/
 
 #dinamic libs   
-libcalc.so
+*.so
+
+#objects
+*.o
 
 # Editor/IDE specific files
 .vscode/
