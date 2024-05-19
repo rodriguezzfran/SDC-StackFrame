@@ -6,7 +6,7 @@ typedef int (*plus_one_func)(int);
 
 int* plus_one(float* array, int size) {
     // Cargar la librería de ensamblador
-    void* handle = dlopen("./build/libcalc.so", RTLD_LAZY);
+    void* handle = dlopen("../build/libcalc.so", RTLD_LAZY);
     if (handle == NULL) {
         fprintf(stderr, "Error al cargar la librería de ensamblador\n");
         return NULL;

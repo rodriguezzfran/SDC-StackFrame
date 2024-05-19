@@ -10,7 +10,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 URL = 'https://api.worldbank.org/v2/en/country/all/indicator/SI.POV.GINI?format=json&date=2011:2020&per_page=32500&page=1&country=%22Argentina%22'
 
 #Cargamos la libreria de C
-calculator = ctypes.CDLL('./build/libcalc.so')
+calculator = ctypes.CDLL('../build/libcalc.so')
 
 #Definimos el tipo de dato que vamos a usar en la biblioteca
 calculator.plus_one.argtypes = [ctypes.POINTER(ctypes.c_float),ctypes.c_int]
